@@ -3,7 +3,7 @@ module.exports = function(app,upload,path,isLoggedIn) {
     // Retrieve all 
     app.get('/api/drinks', drink.findAll);
     app.get('/admin/drinks/:page',isLoggedIn,(req,res)=>{
-        res.status(200).sendFile(path.resolve(__dirname+'/../../../../react-admin-restaurant/build/index.html'));
+        res.status(200).sendFile(path.resolve(__dirname+'/../../../../reef-chinuch-restaurant-admin/build/index.html'));
     })
     app.delete('/api/drink/delete/:id',isLoggedIn, drink.delete);
     app.post('/api/drink/add/',[isLoggedIn,upload.single('picture')],drink.create);

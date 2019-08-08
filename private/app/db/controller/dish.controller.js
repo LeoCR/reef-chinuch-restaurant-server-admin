@@ -47,6 +47,7 @@ exports.create = (req, res) => {
 		description: req.body.description,
 		picture:'/img/uploads/'+req.file.filename,
 		category:req.body.category,
+		subcategory:req.body.subcategory,
 		price:req.body.price 
 	}).then(dish => {		
 		  res.status(200).send(dish);
@@ -77,7 +78,7 @@ exports.update = (req, res) => {
 	});
 };
 exports.updateImg = (req, res) => {
-  Dish.update({  
+	Dish.update({  
 		id: req.body.id,
 		name: req.body.name,
 		description: req.body.description,

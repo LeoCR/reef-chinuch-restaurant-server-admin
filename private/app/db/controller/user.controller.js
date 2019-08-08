@@ -33,6 +33,13 @@ exports.findById = (req, res) => {
 var generateHash = function(password) {
         return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
 };
+exports.countUsers=(req,res)=>{
+    var sqlTotalUsers="SELECT MAX(id) as MaxIdUser FROM restaurant_ui.USER;";
+    sequelize.query(sqlTotalUsers, { type: sequelize.QueryTypes.SELECT})
+    .then(maxUserId => {
+                res.send(maxUserId[0]);     
+    })
+}
 exports.update=(req,res)=>{
     var userPassword = generateHash(req.body.password);
     User.update({  

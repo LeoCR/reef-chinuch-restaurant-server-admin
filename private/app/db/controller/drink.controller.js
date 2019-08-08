@@ -29,7 +29,7 @@ exports.create = (req, res) => {
 	}).then(drink => {		
 		  res.status(200).send(drink);
 	}).catch(err => {
-		res.status(500).json({msg: "An error occurred.", details: err});
+		res.status(200).send({msg: "An error occurred.", details: err});
 	});
 };
 exports.findById = (req, res) => {	

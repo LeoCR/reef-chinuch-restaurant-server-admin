@@ -57,9 +57,9 @@ exports.update = (req, res) => {
 	});
 };
 exports.getIngredientsByDish=(req,res)=>{
-	var sqlFindIngredientsByDish="SELECT INGREDIENT_DISH.id_ingredient_dish,INGREDIENT_DISH.id_ingredient, "+
-	" INGREDIENT_DISH.id_dish,INGREDIENT.name,INGREDIENT.img FROM INGREDIENT_DISH "+
-	" INNER JOIN  INGREDIENT ON INGREDIENT.id=INGREDIENT_DISH.id_ingredient where INGREDIENT_DISH.id_dish='"+req.params.idDish + "' ;";
+	var sqlFindIngredientsByDish="SELECT ingredient_dish.id_ingredient_dish,ingredient_dish.id_ingredient, "+
+	" ingredient_dish.id_dish,ingredient.name,ingredient.img FROM ingredient_dish "+
+	" INNER JOIN  ingredient ON ingredient.id=ingredient_dish.id_ingredient WHERE ingredient_dish.id_dish='" +req.params.idDish+"' ;";
 	sequelize.query(sqlFindIngredientsByDish, { type: sequelize.QueryTypes.SELECT})
 	.then(ingredients => {
 				res.send(ingredients);     
@@ -68,7 +68,7 @@ exports.getIngredientsByDish=(req,res)=>{
 	});
 }
 exports.getLastIngredientToDishId=(req,res)=>{
-		var sqlGetLastIngredientToDishId="SELECT MAX(id_ingredient_dish) AS maxIngredientDishId FROM restaurant_ui.INGREDIENT_DISH;";
+		var sqlGetLastIngredientToDishId="SELECT MAX(id_ingredient_dish) AS maxIngredientDishId FROM ingredient_dish;";
 		sequelize.query(sqlGetLastIngredientToDishId, { type: sequelize.QueryTypes.SELECT})
 		.then(ingredients => {
 					res.send(ingredients[0]);     
