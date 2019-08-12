@@ -8,4 +8,5 @@ module.exports = function(app,path,isLoggedIn) {
     app.put('/api/user/update/:id',user.update);
     app.post('/api/user/add/',user.create)
     app.delete('/api/user/delete/:id',user.delete);
+    app.get('/api/count-users',user.countUsers)
 }
