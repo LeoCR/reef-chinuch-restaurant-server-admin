@@ -76,6 +76,7 @@ require(path.resolve(__dirname+'/app/route/dish.route.js'))(app,upload,path,isLo
 require(path.resolve(__dirname+'/app/route/public.route.js'))(app,express,path,isLoggedIn);
 require(path.resolve(__dirname+'/app/route/private.route.js'))(app,express,path,isLoggedIn);
 require(path.resolve(__dirname+'/app/route/ingredient.route.js'))(app,upload,path,isLoggedIn);
+require(path.resolve(__dirname+'/app/route/invoice.route.js'))(app,path,isLoggedIn);
 require(path.resolve(__dirname+'/app/route/auth.route.js'))(app,passport,path);
 //load passport strategies
 require(path.resolve(__dirname+'/app/db/config/passport/passport.js'))(passport, models.reef_user);
