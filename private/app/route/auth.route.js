@@ -4,7 +4,7 @@ module.exports = function(app, passport,path) {
     app.get('/admin/signin', authController.signin);
     app.post('/admin/signup', passport.authenticate('local-signup', {
             successRedirect: '/admin',
-            failureRedirect: '/signup'
+            failureRedirect: '/admin/signup'
         }
     ));
     app.get('/admin/logout', authController.logout);
@@ -24,13 +24,13 @@ module.exports = function(app, passport,path) {
         res.sendFile(path.resolve(__dirname+'/../../../../react-admin-restaurant/build/index.html'));
     });
     app.post('/api/signup', passport.authenticate('local-signup', {
-        successRedirect: '/checkout',
+        successRedirect: '/user',
         failureRedirect: '/'
         }
     ));
     app.get('/api/logout', authController.logout);
     app.post('/api/login', passport.authenticate('local-signin', {
-            successRedirect: '/checkout/',
+            successRedirect: '/user',
             failureRedirect: '/'
         }
     ));

@@ -12,13 +12,13 @@ DROP TABLE IF EXISTS reef_user;
 use reef_chinuch_restaurant;
 
 CREATE TABLE IF NOT EXISTS ingredient(
-	id VARCHAR(250) PRIMARY KEY,
+	id VARCHAR(150) PRIMARY KEY,
     name VARCHAR(250) NOT NULL,
     img VARCHAR(250) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS reef_user(
-    id SERIAL  PRIMARY KEY , 
+    id INT PRIMARY KEY AUTO_INCREMENT, 
     firstname VARCHAR(250), 
     lastname VARCHAR(250), 
     username VARCHAR(250), 
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS reef_user(
     email VARCHAR(250), 
     password VARCHAR(250), 
     last_login timestamp, 
-    status VARCHAR(150) DEFAULT 'active', 
+    status ENUM('active', 'inactive') DEFAULT 'active', 
     created_at timestamp , 
     updated_at timestamp ,
     provider VARCHAR(250),
@@ -52,18 +52,16 @@ CREATE TABLE IF NOT EXISTS drink(
     price DECIMAL(10,2) NOT NULL
 );
 
-
 CREATE TABLE IF NOT EXISTS ingredient_dish(
-	id_ingredient_dish SERIAL PRIMARY KEY,
+	id_ingredient_dish INT AUTO_INCREMENT PRIMARY KEY,
     id_ingredient VARCHAR(250) NOT NULL,
     id_dish VARCHAR(250) NOT NULL,
-    CONSTRAINT FK_ID_Ingredient FOREIGN KEY (id_ingredient) REFERENCES INGREDIENT(id) ON DELETE CASCADE,
-    CONSTRAINT FK_ID_Dish FOREIGN KEY (id_dish) REFERENCES DISH(id) ON DELETE CASCADE
+    CONSTRAINT FK_ID_Ingredient FOREIGN KEY (id_ingredient) REFERENCES ingredient(id) ON DELETE CASCADE,
+    CONSTRAINT FK_ID_Dish FOREIGN KEY (id_dish) REFERENCES dish(id) ON DELETE CASCADE
 );
 
-
 CREATE TABLE IF NOT EXISTS reservation(
-    id SERIAL PRIMARY KEY,
+    id INT AUTO_INCREMENT PRIMARY KEY,
 	full_name VARCHAR(250), 
     telephone VARCHAR(250), 
     email VARCHAR(250), 
@@ -74,7 +72,7 @@ CREATE TABLE IF NOT EXISTS reservation(
 
 
 CREATE TABLE IF NOT EXISTS header_invoice(
-	id_header SERIAL PRIMARY KEY,
+	id_header INT AUTO_INCREMENT PRIMARY KEY,
     total DECIMAL(10,4)  NOT NULL,
     subtotal DECIMAL(10,4),
     sales_tax DECIMAL(10,4),
@@ -85,12 +83,12 @@ CREATE TABLE IF NOT EXISTS header_invoice(
 
 
 CREATE TABLE IF NOT EXISTS invoice_detail(
-	id_invoice_detail SERIAL PRIMARY KEY,
+	id_invoice_detail INT AUTO_INCREMENT PRIMARY KEY,
     client_restaurant INT NOT NULL,
     header_invoice INT NOT NULL,
     order_code VARCHAR(250) NOT NULL,
     date_of_billing timestamp NOT NULL,
-    CONSTRAINT FK_ClientInvoiceDetail FOREIGN KEY (client_restaurant) REFERENCES REEF_USER(id) ON DELETE CASCADE,
+    CONSTRAINT FK_ClientInvoiceDetail FOREIGN KEY (client_restaurant) REFERENCES reef_user(id) ON DELETE CASCADE,
     CONSTRAINT FK_HeaderInvoiceDetail FOREIGN KEY (header_invoice) REFERENCES header_invoice(id_header) ON DELETE CASCADE
 );
 
@@ -300,7 +298,7 @@ INSERT INTO ingredient_dish VALUES(62,'1ING','7APPTZR');
 INSERT INTO ingredient_dish VALUES(63,'3ING','7APPTZR');
 INSERT INTO ingredient_dish VALUES(64,'23ING','7APPTZR');
 INSERT INTO ingredient_dish VALUES(65,'11ING','7APPTZR');
-INSERT INTO REEF_USER VALUES 
+INSERT INTO reef_user VALUES 
 (1,'Leonardo','Aranibar',
 'LeonardoAranibarSanchez','I am Web Developer','laranibarsanchez@gmail.com',
 '$2a$08$qP7LVeZRulKdFIVmwsemUem24bSYY9e4pg.NWqJg5p5FCFAIvxTvS',

@@ -62,14 +62,7 @@ var storage = multer.diskStorage(
       extname: '.html'
   }));
   app.set('view engine', '.html');
-  app.get('/validate/authentication',function(req,res){
-    if (req.isAuthenticated()){
-      res.json({isAuthenticated:true});
-    }
-    else{
-      res.json({isAuthenticated:false});
-    }
-  });
+ 
 require(path.resolve(__dirname+'/app/route/user.route.js'))(app,path,isLoggedIn);
 require(path.resolve(__dirname+'/app/route/drink.route.js'))(app,upload,path,isLoggedIn);
 require(path.resolve(__dirname+'/app/route/dish.route.js'))(app,upload,path,isLoggedIn);
